@@ -1,0 +1,131 @@
+@import './variables.css';
+
+/* ═══════════════════════════════════════
+   CATALOG HEADER
+═══════════════════════════════════════ */
+.chdr {
+  background: linear-gradient(135deg, var(--nv), var(--bl2));
+  padding: 2.5rem 5%;
+  color: #fff;
+  text-align: center;
+}
+.chdr h1 {
+  font-size: clamp(1.35rem, 3.5vw, 1.9rem);
+  font-weight: 900;
+  margin-bottom: .3rem;
+  line-height: 1.2;
+}
+.chdr p {
+  opacity: .68;
+  font-size: .95rem;
+  margin-bottom: 1.1rem;
+}
+
+/* Search dentro del header */
+.csrch {
+  max-width: 420px;
+  margin: 0 auto;
+  position: relative;
+}
+.csrch-ico {
+  position: absolute;
+  left: .9rem;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: .4;
+  pointer-events: none;
+}
+.csrch input {
+  width: 100%;
+  padding: .72rem 1.2rem .72rem 2.8rem;
+  border-radius: var(--pill);
+  border: none;
+  font-size: .9rem;
+  color: var(--tx);
+  outline: none;
+  box-shadow: 0 4px 18px rgba(0,0,0,.2);
+  transition: var(--t);
+}
+.csrch input:focus { box-shadow: 0 4px 24px rgba(0,0,0,.3); }
+
+/* ═══════════════════════════════════════
+   FILTER BAR
+═══════════════════════════════════════ */
+.fbar {
+  display: flex;
+  gap: .45rem;
+  flex-wrap: wrap;
+  padding: 1.1rem 3%;
+  justify-content: center;
+}
+
+.fb {
+  padding: .42rem 1.05rem;
+  border-radius: var(--pill);
+  background: #fff;
+  border: 1.5px solid rgba(15,37,64,.1);
+  font-weight: 700;
+  font-size: .8rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: .25rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,.06);
+  transition: var(--t);
+  color: var(--tx);
+  white-space: nowrap;
+}
+.fb:hover,
+.fb.on {
+  background: var(--nv);
+  color: #fff;
+  border-color: var(--nv);
+  box-shadow: 0 6px 18px rgba(15,37,64,.25);
+  transform: translateY(-2px);
+}
+
+/* ═══════════════════════════════════════
+   RESULTS COUNTER
+═══════════════════════════════════════ */
+.results-count {
+  font-size: .82rem;
+  color: var(--mt);
+  margin-bottom: .8rem;
+  font-weight: 600;
+}
+
+/* ═══════════════════════════════════════
+   EMPTY STATE
+═══════════════════════════════════════ */
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 4rem 1rem;
+}
+.empty-state .empty-ico {
+  font-size: 3.5rem;
+  margin-bottom: .8rem;
+  display: block;
+  opacity: .4;
+}
+.empty-state p {
+  color: var(--mt);
+  font-size: .95rem;
+}
+.empty-state a {
+  display: inline-block;
+  margin-top: 1rem;
+  color: var(--bl2);
+  font-weight: 700;
+  text-decoration: none;
+}
+.empty-state a:hover { text-decoration: underline; }
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media (max-width: 480px) {
+  .fbar  { gap: .35rem; padding: .8rem 3%; }
+  .fb    { font-size: .74rem; padding: .36rem .75rem; }
+  .chdr  { padding: 1.8rem 5%; }
+}

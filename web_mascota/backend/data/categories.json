@@ -1,0 +1,51 @@
+[
+  {
+    "id": "perros",
+    "name": "Perros",
+    "subtitle": "Alimentos y accesorios",
+    "emoji": "🐶",
+    "bg": "#fffae8"
+  },
+  {
+    "id": "gatos",
+    "name": "Gatos",
+    "subtitle": "Todo para tu gato",
+    "emoji": "🐱",
+    "bg": "#e8f2ff"
+  },
+  {
+    "id": "roedores",
+    "name": "Aves y Roedores",
+    "subtitle": "Conejos, hámsters, aves",
+    "emoji": "🐹",
+    "bg": "#e8f8ef"
+  },
+  {
+    "id": "acuario",
+    "name": "Acuario",
+    "subtitle": "Peces, filtros, plantas",
+    "emoji": "🐠",
+    "bg": "#e6f5ff"
+  },
+  {
+    "id": "sanitaria",
+    "name": "Sanitaria",
+    "subtitle": "Arena y bandeja",
+    "emoji": "🐾",
+    "bg": "#f5f0ff"
+  },
+  {
+    "id": "shampoo",
+    "name": "Higiene",
+    "subtitle": "Shampoo y cuidado",
+    "emoji": "🛁",
+    "bg": "#e8fff0"
+  },
+  {
+    "id": "educadores",
+    "name": "Educadores",
+    "subtitle": "Collares y clickers",
+    "emoji": "🎓",
+    "bg": "#fff0e8"
+  }
+]

@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tu Carrito de Compras — PetNest UY</title>
+<meta name="description" content="Revisá los productos seleccionados y finalizá tu compra en PetNest UY. Envío gratis desde $1.000 UYU.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://petnestuy.com/cart.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://petnestuy.com/cart.html">
+<meta property="og:title" content="Tu Carrito de Compras — PetNest UY">
+<meta property="og:description" content="Revisá los productos seleccionados y finalizá tu compra en PetNest UY.">
+<meta property="og:image" content="https://petnestuy.com/assets/logo/logo.jpeg">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{scroll-behavior:smooth;overflow-x:hidden;background:#edf2f8;color:#0f1f2e;font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh}
+:root{--nv:#0f2540;--bl:#1a4a8a;--bl2:#2563c4;--gd:#f5a81c;--lg:#ffd166;--bg:#edf2f8;--tx:#0f1f2e;--mt:#4a6580;--card:rgba(255,255,255,.92);--R:20px;--r:12px}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:var(--bl2);border-radius:5px}
+
+/* NAV */
+header{position:fixed;top:0;left:0;right:0;width:100%;z-index:999;background:rgba(255,255,255,.95);backdrop-filter:blur(24px);border-bottom:1px solid rgba(255,255,255,.6);box-shadow:0 2px 24px rgba(15,37,64,.09)}
+.htop{display:flex;align-items:center;gap:.5rem;padding:.6rem 3%;border-bottom:1px solid rgba(15,37,64,.06);width:100%}
+.logo{display:flex;align-items:center;gap:.45rem;text-decoration:none;flex-shrink:0}
+.logo-icon{width:40px;height:40px;border-radius:50%;overflow:hidden;flex-shrink:0;box-shadow:0 4px 14px rgba(26,74,138,.2);display:flex;align-items:center;justify-content:center}
+.logo-icon svg{width:100%;height:100%;display:block}
+.logo-name{font-size:1.1rem;font-weight:900;background:linear-gradient(135deg,#0f2540,#2563c4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;white-space:nowrap}
+.hsearch{flex:1;min-width:0;position:relative;margin:0 .4rem}
+.hsearch input{width:100%;padding:.55rem .85rem .55rem 2.4rem;border-radius:100px;border:1.5px solid rgba(37,99,196,.18);background:rgba(237,242,248,.8);font-size:.85rem;color:var(--tx);outline:none;transition:.2s}
+.hsearch input:focus{border-color:var(--bl2);background:#fff}
+.hsearch input::placeholder{color:var(--mt)}
+.hsearch-ico{position:absolute;left:.75rem;top:50%;transform:translateY(-50%);opacity:.4;pointer-events:none}
+.hacts{display:flex;align-items:center;gap:.28rem;flex-shrink:0;margin-left:auto}
+.hbtn{display:flex;align-items:center;gap:.3rem;padding:.48rem .7rem;border-radius:var(--r);border:1.5px solid rgba(15,37,64,.1);background:none;font-size:.78rem;font-weight:600;color:var(--tx);transition:.2s;white-space:nowrap;text-decoration:none;cursor:pointer}
+.hbtn:hover{background:var(--bg)}
+.hcart{background:linear-gradient(135deg,var(--bl),var(--bl2));color:#fff !important;border-color:transparent;box-shadow:0 4px 16px rgba(37,99,196,.35);padding:.48rem .85rem}
+.hcart:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(37,99,196,.45)}
+.cn{background:var(--gd);color:#fff;border-radius:100px;padding:.1rem .38rem;font-size:.7rem;font-weight:800;min-width:17px;text-align:center}
+.hnav{display:flex;align-items:center;gap:.15rem;padding:.35rem 3%;overflow-x:auto;-ms-overflow-style:none;scrollbar-width:none}
+.hnav::-webkit-scrollbar{display:none}
+.ncat{display:flex;align-items:center;gap:.28rem;padding:.36rem .9rem;border-radius:100px;border:none;background:none;font-size:.82rem;font-weight:600;color:var(--mt);transition:.2s;white-space:nowrap;text-decoration:none}
+.ncat:hover,.ncat.on{background:var(--nv);color:#fff}
+
+/* MAIN */
+main{padding-top:96px}
+
+/* CART HEADER */
+.cart-page-hdr{background:linear-gradient(135deg,var(--nv),var(--bl2));padding:2rem 3%;color:#fff;margin-bottom:2rem}
+.cart-page-hdr h1{font-size:clamp(1.35rem,3.5vw,1.8rem);font-weight:900;margin-bottom:.25rem;line-height:1.2}
+.cart-page-hdr p{font-size:.9rem;opacity:.68}
+
+/* LAYOUT */
+.wrap{max-width:1240px;margin:0 auto;padding:0 3%}
+.cart-layout{display:grid;grid-template-columns:1fr 340px;gap:1.8rem;align-items:start;padding-bottom:3rem}
+@media(max-width:820px){.cart-layout{grid-template-columns:1fr}}
+
+/* EMPTY */
+.cart-empty{text-align:center;padding:4rem 1rem;color:var(--mt)}
+.cart-empty .ei{font-size:4rem;display:block;margin-bottom:1rem;opacity:.35}
+.cart-empty h2{font-size:1.3rem;font-weight:900;color:var(--tx);margin-bottom:.4rem}
+.cart-empty p{font-size:.9rem;margin-bottom:1.5rem}
+.btn-primary{display:inline-block;padding:.78rem 1.8rem;border-radius:100px;background:linear-gradient(135deg,var(--nv),var(--bl2));color:#fff;font-weight:800;font-size:.92rem;text-decoration:none;box-shadow:0 6px 22px rgba(37,99,196,.35);transition:.2s;border:none;cursor:pointer}
+.btn-primary:hover{transform:translateY(-2px)}
+
+/* ITEM */
+.cart-item{background:var(--card);border-radius:var(--R);border:1px solid rgba(255,255,255,.75);box-shadow:0 4px 20px rgba(0,0,0,.07);padding:1rem 1.2rem;display:flex;align-items:center;gap:1rem;margin-bottom:.85rem;transition:box-shadow .2s}
+.cart-item:hover{box-shadow:0 8px 30px rgba(0,0,0,.12)}
+.ci-img{width:68px;height:68px;border-radius:var(--r);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;position:relative}
+/* Contener el SVG SIEMPRE dentro del cuadro */
+.ci-img svg{position:absolute;inset:0;width:100% !important;height:100% !important;max-width:68px !important;max-height:68px !important;padding:8px}
+.ci-info{flex:1;min-width:0}
+.ci-cat{font-size:.65rem;color:var(--mt);font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.15rem}
+.ci-name{font-size:.9rem;font-weight:800;color:var(--tx);line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:.2rem}
+.ci-unit{font-size:.78rem;color:var(--mt)}
+.ci-right{display:flex;flex-direction:column;align-items:flex-end;gap:.5rem;flex-shrink:0}
+.ci-qty{display:flex;align-items:center;gap:.25rem;background:var(--bg);border-radius:100px;padding:.2rem .35rem}
+.ci-qty button{width:28px;height:28px;border:none;background:none;cursor:pointer;border-radius:50%;font-size:1rem;font-weight:800;color:var(--tx);display:flex;align-items:center;justify-content:center;transition:.15s}
+.ci-qty button:hover{background:rgba(37,99,196,.12);color:var(--bl2)}
+.ci-qty span{font-size:.88rem;font-weight:800;min-width:22px;text-align:center}
+.ci-sub{font-size:1rem;font-weight:900;color:var(--nv)}
+.ci-del{width:28px;height:28px;border:none;background:none;cursor:pointer;border-radius:50%;display:flex;align-items:center;justify-content:center;opacity:.35;transition:.2s}
+.ci-del:hover{background:rgba(231,76,60,.1);opacity:1}
+.ci-del svg{width:14px;height:14px;stroke:#e74c3c;fill:none;stroke-width:2.5}
+
+/* SUMMARY */
+.summary-card{background:var(--card);border-radius:var(--R);border:1px solid rgba(255,255,255,.75);box-shadow:0 4px 20px rgba(0,0,0,.07);padding:1.4rem 1.5rem;position:sticky;top:calc(96px + 1rem)}
+.sum-title{font-size:1.05rem;font-weight:900;color:var(--tx);margin-bottom:1.1rem}
+.sum-row{display:flex;justify-content:space-between;align-items:center;font-size:.88rem;color:var(--mt);margin-bottom:.6rem}
+.sum-row span:last-child{font-weight:700;color:var(--tx)}
+.sum-row.free-ship span:last-child{color:#27ae60;font-weight:800}
+.sum-div{height:1px;background:rgba(15,37,64,.08);margin:.85rem 0}
+.sum-total{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.sum-total span:first-child{font-size:1rem;font-weight:700;color:var(--tx)}
+.sum-total span:last-child{font-size:1.35rem;font-weight:900;color:var(--nv)}
+
+/* Barra envío gratis */
+.fsb{margin-bottom:1.2rem}
+.fsb-top{display:flex;justify-content:space-between;font-size:.74rem;font-weight:600;color:var(--mt);margin-bottom:.35rem}
+.fsb-track{height:6px;background:rgba(15,37,64,.08);border-radius:100px;overflow:hidden}
+.fsb-fill{height:100%;background:linear-gradient(90deg,var(--bl2),var(--gd));border-radius:100px;transition:width .5s ease;min-width:4px}
+
+.btn-checkout{width:100%;padding:.82rem;border-radius:100px;border:none;background:linear-gradient(135deg,var(--nv),var(--bl2));color:#fff;font-weight:800;font-size:.93rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.5rem;box-shadow:0 6px 22px rgba(37,99,196,.35);transition:.2s;margin-bottom:.6rem;font-family:inherit}
+.btn-checkout:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(37,99,196,.45)}
+.btn-keep{display:block;text-align:center;font-size:.82rem;font-weight:600;color:var(--mt);text-decoration:none;margin-bottom:.9rem;transition:.2s}
+.btn-keep:hover{color:var(--bl2)}
+.btn-clear{width:100%;padding:.5rem;border-radius:100px;border:1.5px solid rgba(15,37,64,.1);background:none;color:var(--mt);font-size:.8rem;font-weight:600;cursor:pointer;transition:.18s;font-family:inherit}
+.btn-clear:hover{background:rgba(231,76,60,.06);border-color:rgba(231,76,60,.25);color:#e74c3c}
+
+/* Métodos de pago */
+.pay-box{margin-top:1rem;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.pay-lbl{font-size:.72rem;color:var(--mt);font-weight:600}
+.pay-tag{background:rgba(15,37,64,.06);border:1px solid rgba(15,37,64,.1);padding:.22rem .55rem;border-radius:7px;font-size:.68rem;font-weight:700;color:var(--mt)}
+
+/* FOOTER */
+footer{background:var(--nv);color:#fff;padding:2.2rem 5% 1.1rem}
+.ft-brand{text-align:center;padding-bottom:1.6rem;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:1.6rem}
+.ft-logo{font-size:1.45rem;font-weight:900;margin-bottom:.5rem;display:flex;align-items:center;justify-content:center;gap:.4rem}
+.ft-desc{font-size:.83rem;opacity:.58;line-height:1.6;max-width:280px;margin:0 auto .9rem}
+.ft-contact{display:flex;flex-direction:column;align-items:center;gap:.45rem;margin-bottom:.9rem}
+.ft-ci{display:flex;align-items:center;gap:.5rem;font-size:.82rem;opacity:.78}
+.ft-ico{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ft-ico svg{width:13px;height:13px;fill:none;stroke-width:2.2}
+.ft-social{display:flex;gap:.45rem;justify-content:center}
+.ft-sb{width:33px;height:33px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.2s}
+.ft-sb svg{width:14px;height:14px;fill:none;stroke:#fff;stroke-width:2}
+.ft-sb:hover{background:var(--gd);transform:scale(1.1)}
+.ft-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem 1rem;margin-bottom:1.3rem}
+.ft-col h4{font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.6rem;padding-bottom:.3rem;border-bottom:1px solid rgba(255,255,255,.1)}
+.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:.3rem}
+.ft-col ul li{font-size:.76rem;opacity:.48;cursor:pointer;transition:.15s}
+.ft-col ul li:hover{opacity:1}
+.ft-bot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;padding-top:.85rem;border-top:1px solid rgba(255,255,255,.08)}
+.ft-copy{font-size:.72rem;opacity:.28}
+.ft-pays{display:flex;gap:.35rem;flex-wrap:wrap}
+.ft-pay{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);padding:.24rem .58rem;border-radius:8px;font-size:.69rem;font-weight:700;color:rgba(255,255,255,.62)}
+
+/* Toast */
+.toast{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--nv);color:#fff;padding:.7rem 1.2rem;border-radius:12px;font-size:.84rem;font-weight:600;box-shadow:0 8px 28px rgba(0,0,0,.22);z-index:2000;transform:translateY(80px);opacity:0;transition:.3s ease;border-left:4px solid #27ae60;pointer-events:none}
+.toast.show{transform:translateY(0);opacity:1}
+
+@media(max-width:600px){
+  .cart-item{flex-wrap:wrap}
+  .ci-right{flex-direction:row;align-items:center;width:100%;justify-content:space-between}
+  .ft-cols{grid-template-columns:1fr 1fr}
+  @media(max-width:480px){.ft-bot{flex-direction:column;align-items:center}}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="htop">
+    <a class="logo" href="/index.html">
+      <div class="logo-icon" id="hlogo"></div>
+      <span class="logo-name">PetNest UY</span>
+    </a>
+    <div class="hsearch">
+      <svg class="hsearch-ico" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="search" placeholder="Buscar productos…" onkeydown="if(event.key==='Enter'&&this.value.trim())location.href='/catalog.html?search='+encodeURIComponent(this.value.trim())">
+    </div>
+    <div class="hacts">
+      <a class="hbtn" href="/login.html">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span id="usr-lbl">Mi cuenta</span>
+      </a>
+      <a class="hbtn hcart" href="/cart.html">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="cn" id="ccount">0</span>
+      </a>
+    </div>
+  </div>
+  <nav class="hnav">
+    <button class="ncat on"  onclick="goTo('home')">🏠 Inicio</button>
+    <button class="ncat" onclick="goTo('cat','nuevo')">✨ Novedades</button>
+    <button class="ncat" onclick="goTo('cat','descuentos')">🔥 Descuentos</button>
+    <button class="ncat" onclick="goTo('cat','todos')">🛍️ Catálogo</button>
+    <button class="ncat" onclick="goTo('cat','perros')">🐶 Perros</button>
+    <button class="ncat" onclick="goTo('cat','gatos')">🐱 Gatos</button>
+    <button class="ncat" onclick="goTo('cat','roedores')">🐹 Aves y Roedores</button>
+    <button class="ncat" onclick="goTo('cat','acuario')">🐠 Acuario</button>
+    <button class="ncat" onclick="goTo('cat','shampoo')">🛁 Higiene</button>
+    <button class="ncat" onclick="goTo('cat','educadores')">🎓 Educadores</button>
+    <button class="ncat" onclick="goTo('cat','sanitaria')">🐱 Sanitaria</button>
+  </nav>
+</header>
+
+<main>
+  <div class="cart-page-hdr">
+    <div class="wrap">
+      <h1>🛒 Tu carrito</h1>
+      <p id="hdr-sub">Cargando…</p>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="cart-layout">
+      <section id="items-col"></section>
+      <aside id="summary-col" style="display:none">
+        <div class="summary-card">
+          <div class="sum-title">Resumen del pedido</div>
+          <div class="sum-row"><span>Subtotal (<span id="s-count">0</span> prod.)</span><span id="s-sub">$0</span></div>
+          <div class="sum-row free-ship"><span>Envío</span><span id="s-ship">—</span></div>
+          <div class="sum-div"></div>
+          <div class="sum-total"><span>Total</span><span id="s-total">$0</span></div>
+          <div class="fsb">
+            <div class="fsb-top"><span id="fsb-txt"></span><span id="fsb-pct"></span></div>
+            <div class="fsb-track"><div class="fsb-fill" id="fsb-fill" style="width:0%"></div></div>
+          </div>
+          <button class="btn-checkout" onclick="checkout()">
+            Finalizar compra
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+          <a href="/catalog.html" class="btn-keep">← Seguir comprando</a>
+          <button class="btn-clear" onclick="doClear()">Vaciar carrito</button>
+        </div>
+        <div class="pay-box">
+          <span class="pay-lbl">Aceptamos</span>
+          <span class="pay-tag">VISA</span>
+          <span class="pay-tag">MasterCard</span>
+          <span class="pay-tag">MercadoPago</span>
+          <span class="pay-tag">Abitab</span>
+        </div>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<div id="footer-wrap"></div>
+<div class="toast" id="toast"></div>
+
+<script>
+function goTo(page, filter) {
+  if (page === 'home') {
+    location.href = '/index.html';
+    return;
+  }
+  if (!filter || filter === 'todos') {
+    location.href = '/catalog.html';
+  } else if (filter === 'nuevo' || filter === 'descuentos') {
+    location.href = `/catalog.html?tag=${filter}`;
+  } else {
+    location.href = `/catalog.html?category=${filter}`;
+  }
+}
+
+const CART_KEY = 'petnest_cart';
+const FREE_MIN = 1000;
+
+const LOGO_SVG = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" fill="#d8eaf4" stroke="#1a4080" stroke-width="3"/><ellipse cx="33" cy="68" rx="15" ry="20" fill="#f5c040"/><circle cx="28" cy="38" r="13" fill="#f5c040"/><ellipse cx="20" cy="34" rx="5" ry="9" fill="#e8a820" transform="rotate(-20 20 34)"/><circle cx="24" cy="35" r="1.8" fill="#1a2b3c"/><ellipse cx="20" cy="45" rx="2" ry="1.2" fill="#1a2b3c"/><rect x="40" y="55" width="8" height="13" rx="4" fill="#f5c040"/><ellipse cx="68" cy="66" rx="13" ry="17" fill="#8fb0c0"/><circle cx="70" cy="44" r="11" fill="#8fb0c0"/><polygon points="63,37 60,27 67,34" fill="#8fb0c0"/><polygon points="77,37 80,27 73,34" fill="#8fb0c0"/><polygon points="63,36 61,28 67,33" fill="#c8dde8"/><polygon points="77,36 79,28 73,33" fill="#c8dde8"/><circle cx="74" cy="43" r="1.5" fill="#1a2b3c"/><circle cx="66" cy="43" r="1.5" fill="#1a2b3c"/><polygon points="70,47 68.5,49 71.5,49" fill="#d07080"/><line x1="71" y1="49" x2="82" y2="47" stroke="#1a2b3c" stroke-width=".8"/><line x1="71" y1="51" x2="82" y2="52" stroke="#1a2b3c" stroke-width=".8"/><line x1="69" y1="49" x2="58" y2="47" stroke="#1a2b3c" stroke-width=".8"/><line x1="69" y1="51" x2="58" y2="52" stroke="#1a2b3c" stroke-width=".8"/><path d="M79 79 Q93 68 87 54" stroke="#8fb0c0" stroke-width="4.5" fill="none" stroke-linecap="round"/></svg>`;
+
+const BG = {perros:'linear-gradient(145deg,#fffae8,#ffeebb)',gatos:'linear-gradient(145deg,#e8f2ff,#c0d8f5)',roedores:'linear-gradient(145deg,#e8f8ef,#b8e8c8)',acuario:'linear-gradient(145deg,#e6f5ff,#b8dcf8)',sanitaria:'linear-gradient(145deg,#f5f0ff,#ddd0f8)',shampoo:'linear-gradient(145deg,#e8fff0,#b8f0d0)',educadores:'linear-gradient(145deg,#fff0e8,#f5d0b0)'};
+
+const SVG_MAP = {
+  perros:`<svg viewBox="0 0 80 80"><ellipse cx="40" cy="55" rx="20" ry="18" fill="#f5c040"/><circle cx="40" cy="30" r="17" fill="#f5c040"/><ellipse cx="28" cy="26" rx="7" ry="12" fill="#e8a820" transform="rotate(-15 28 26)"/><ellipse cx="52" cy="26" rx="7" ry="12" fill="#e8a820" transform="rotate(15 52 26)"/><circle cx="34" cy="29" r="2.5" fill="#1a2b3c"/><circle cx="46" cy="29" r="2.5" fill="#1a2b3c"/><ellipse cx="40" cy="35" rx="3.5" ry="2" fill="#c06840"/><path d="M58 60 Q68 65 64 54" stroke="#e8a820" stroke-width="4" fill="none" stroke-linecap="round"/></svg>`,
+  gatos:`<svg viewBox="0 0 80 80"><ellipse cx="40" cy="55" rx="18" ry="17" fill="#8ab0c4"/><circle cx="40" cy="30" r="16" fill="#8ab0c4"/><polygon points="26,20 22,6 34,18" fill="#8ab0c4"/><polygon points="54,20 58,6 46,18" fill="#8ab0c4"/><polygon points="27,19 24,10 33,18" fill="#c8dde8"/><polygon points="53,19 56,10 47,18" fill="#c8dde8"/><circle cx="35" cy="28" r="2" fill="#0a1830"/><circle cx="45" cy="28" r="2" fill="#0a1830"/><polygon points="40,33 38,36 42,36" fill="#d07080"/><path d="M56 60 Q68 68 64 52" stroke="#8ab0c4" stroke-width="5" fill="none" stroke-linecap="round"/></svg>`,
+  roedores:`<svg viewBox="0 0 80 80"><ellipse cx="40" cy="55" rx="16" ry="20" fill="#4aa870"/><circle cx="40" cy="28" r="14" fill="#4aa870"/><ellipse cx="40" cy="28" rx="9" ry="14" fill="#5bc080"/><circle cx="36" cy="25" r="2.5" fill="#0a1810"/><circle cx="44" cy="25" r="2.5" fill="#0a1810"/><polygon points="40,31 37,35 43,35" fill="#e8a820"/></svg>`,
+  acuario:`<svg viewBox="0 0 80 80"><ellipse cx="38" cy="40" rx="22" ry="14" fill="#3a90d8"/><polygon points="60,40 72,28 72,52" fill="#2070b8"/><circle cx="22" cy="37" r="3.5" fill="#0a1830"/><circle cx="22.7" cy="36.5" r="1.1" fill="#fff"/></svg>`,
+  sanitaria:`<svg viewBox="0 0 80 80"><ellipse cx="40" cy="55" rx="18" ry="17" fill="#b0a0d4"/><circle cx="40" cy="30" r="16" fill="#b0a0d4"/><polygon points="26,20 22,6 34,18" fill="#b0a0d4"/><polygon points="54,20 58,6 46,18" fill="#b0a0d4"/><circle cx="35" cy="28" r="2" fill="#1a0830"/><circle cx="45" cy="28" r="2" fill="#1a0830"/></svg>`,
+  shampoo:`<svg viewBox="0 0 80 80"><rect x="28" y="20" width="24" height="36" rx="8" fill="#5bc0c0"/><rect x="34" y="14" width="12" height="8" rx="4" fill="#3a9090"/><circle cx="36" cy="36" r="3" fill="rgba(255,255,255,.4)"/><circle cx="44" cy="42" r="2" fill="rgba(255,255,255,.4)"/></svg>`,
+  educadores:`<svg viewBox="0 0 80 80"><rect x="20" y="30" width="40" height="25" rx="8" fill="#f5c040"/><rect x="34" y="20" width="12" height="12" rx="4" fill="#e8a820"/><circle cx="30" cy="42" r="4" fill="#1a2b3c"/><circle cx="50" cy="42" r="4" fill="#1a2b3c"/></svg>`,
+};
+
+function getCart(){ return JSON.parse(localStorage.getItem(CART_KEY)||'[]'); }
+function saveCart(c){ localStorage.setItem(CART_KEY,JSON.stringify(c)); }
+
+function getTotal(){ return getCart().reduce((s,i)=>s+(i.price||i.pr)*i.qty,0); }
+function getCount(){ return getCart().reduce((s,i)=>s+i.qty,0); }
+
+function updateBadge(){
+  document.getElementById('ccount').textContent = getCount();
+}
+
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2800);
+}
+
+function getSvg(item){
+  const cat = item.category||item.cat||'perros';
+  return SVG_MAP[cat]||SVG_MAP.perros;
+}
+function getBg(item){
+  const cat = item.category||item.cat||'perros';
+  return BG[cat]||BG.perros;
+}
+
+function render(){
+  const cart = getCart();
+  const col  = document.getElementById('items-col');
+  const sum  = document.getElementById('summary-col');
+  updateBadge();
+
+  document.getElementById('hdr-sub').textContent =
+    cart.length ? `${getCount()} producto${getCount()!==1?'s':''}` : '0 productos';
+
+  if(!cart.length){
+    col.innerHTML=`<div class="cart-empty">
+      <span class="ei">🛒</span>
+      <h2>Tu carrito está vacío</h2>
+      <p>Todavía no agregaste ningún producto.</p>
+      <a href="/index.html" class="btn-primary">Ir al inicio →</a>
+    </div>`;
+    sum.style.display='none';
+    return;
+  }
+
+  sum.style.display='block';
+  col.innerHTML = cart.map(i=>{
+    const nm    = i.name||i.nm;
+    const pr    = i.price||i.pr;
+    const cat   = i.category||i.cat||'';
+    const svg   = getSvg(i);
+    const bg    = getBg(i);
+    return `<div class="cart-item" id="ci-${i.id}">
+      <div class="ci-img" style="background:${bg}">${svg}</div>
+      <div class="ci-info">
+        <div class="ci-cat">${cat}</div>
+        <div class="ci-name">${nm}</div>
+        <div class="ci-unit">$${pr.toLocaleString('es-UY')} c/u</div>
+      </div>
+      <div class="ci-right">
+        <div class="ci-qty">
+          <button onclick="chQty(${i.id},-1)">−</button>
+          <span id="qty-${i.id}">${i.qty}</span>
+          <button onclick="chQty(${i.id},1)">+</button>
+        </div>
+        <div class="ci-sub" id="sub-${i.id}">$${(pr*i.qty).toLocaleString('es-UY')}</div>
+        <button class="ci-del" onclick="delItem(${i.id})" title="Eliminar">
+          <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg>
+        </button>
+      </div>
+    </div>`;
+  }).join('');
+
+  renderSummary();
+}
+
+function renderSummary(){
+  const sub  = getTotal();
+  const cnt  = getCount();
+  const ship = sub >= FREE_MIN ? 0 : 150;
+  const tot  = sub + ship;
+  const pct  = Math.min(100, Math.round(sub/FREE_MIN*100));
+
+  document.getElementById('s-count').textContent = cnt;
+  document.getElementById('s-sub').textContent   = `$${sub.toLocaleString('es-UY')}`;
+  document.getElementById('s-total').textContent = `$${tot.toLocaleString('es-UY')}`;
+
+  const shipEl = document.getElementById('s-ship');
+  shipEl.textContent = ship===0 ? '✅ Gratis' : `$${ship.toLocaleString('es-UY')}`;
+  shipEl.style.color = ship===0 ? '#27ae60' : 'inherit';
+
+  document.getElementById('fsb-fill').style.width = pct+'%';
+  document.getElementById('fsb-pct').textContent  = pct+'%';
+  const fsbFill = document.getElementById('fsb-fill');
+  if(sub >= FREE_MIN){
+    document.getElementById('fsb-txt').textContent = '🎉 ¡Envío gratis aplicado!';
+    fsbFill.style.background = '#27ae60';
+  } else {
+    document.getElementById('fsb-txt').textContent =
+      `Faltan $${(FREE_MIN-sub).toLocaleString('es-UY')} para envío gratis`;
+    fsbFill.style.background = 'linear-gradient(90deg,#2563c4,#f5a81c)';
+  }
+}
+
+function chQty(id, delta){
+  const cart = getCart();
+  const item = cart.find(i=>i.id===id);
+  if(!item) return;
+  item.qty += delta;
+  if(item.qty<=0){ saveCart(cart.filter(i=>i.id!==id)); document.getElementById(`ci-${id}`)?.remove(); }
+  else {
+    saveCart(cart);
+    document.getElementById(`qty-${id}`).textContent = item.qty;
+    const pr = item.price||item.pr;
+    document.getElementById(`sub-${id}`).textContent = `$${(pr*item.qty).toLocaleString('es-UY')}`;
+  }
+  renderSummary();
+  updateBadge();
+  if(!getCart().length) render();
+}
+
+function delItem(id){
+  saveCart(getCart().filter(i=>i.id!==id));
+  document.getElementById(`ci-${id}`)?.remove();
+  renderSummary();
+  updateBadge();
+  showToast('🗑️ Producto eliminado');
+  if(!getCart().length) render();
+}
+
+function doClear(){
+  if(!confirm('¿Vaciar el carrito?')) return;
+  saveCart([]);
+  render();
+  showToast('🗑️ Carrito vaciado');
+}
+
+function checkout(){
+  if(!getCart().length) return;
+  alert('🎉 Próximamente: integración con MercadoPago.');
+}
+
+// Logo
+document.getElementById('hlogo').innerHTML = LOGO_SVG;
+
+// Sesión
+const u = localStorage.getItem('petnest_user');
+if(u){ try{ document.getElementById('usr-lbl').textContent = JSON.parse(u).name.split(' ')[0]; }catch(e){} }
+
+// Footer
+document.getElementById('footer-wrap').innerHTML = `<footer>
+  <div class="ft-brand">
+    <div class="ft-logo">🐾 PetNest UY</div>
+    <p class="ft-desc">Tu tienda de mascotas de confianza en Uruguay.</p>
+    <div class="ft-contact">
+      <div class="ft-ci"><div class="ft-ico" style="background:rgba(37,99,196,.4)"><svg viewBox="0 0 24 24" stroke="#7ab4f5" fill="none" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.72 9.79 19.79 19.79 0 0 1 1.7 1.22 2 2 0 0 1 3.68 0h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 7.91a16 16 0 0 0 6.08 6.08l1.01-1.02a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><span>+598 099 000 000</span></div>
+      <div class="ft-ci"><div class="ft-ico" style="background:rgba(245,168,28,.3)"><svg viewBox="0 0 24 24" stroke="#ffd166" fill="none" stroke-width="2.2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><span>hola@petnestuy.com</span></div>
+    </div>
+    <div class="ft-social">
+      <div class="ft-sb"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></div>
+      <div class="ft-sb"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/></svg></div>
+      <div class="ft-sb"><svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.96-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75,15.02 15.5,12 9.75,8.98" fill="#fff" stroke="none"/></svg></div>
+    </div>
+  </div>
+  <div class="ft-cols">
+    <div class="ft-col"><h4>Tienda</h4><ul>
+      <li onclick="location.href='/catalog.html'">Catálogo</li>
+      <li onclick="location.href='/catalog.html?tag=descuentos'">Descuentos</li>
+      <li onclick="location.href='/catalog.html?tag=nuevo'">Novedades</li>
+    </ul></div>
+    <div class="ft-col"><h4>Mascotas</h4><ul>
+      <li onclick="location.href='/catalog.html?category=perros'">Perros</li>
+      <li onclick="location.href='/catalog.html?category=gatos'">Gatos</li>
+      <li onclick="location.href='/catalog.html?category=roedores'">Roedores</li>
+      <li onclick="location.href='/catalog.html?category=acuario'">Acuario</li>
+    </ul></div>
+    <div class="ft-col"><h4>Ayuda</h4><ul>
+      <li>Cómo comprar</li><li>Envíos</li>
+      <li>Devoluciones</li><li>Contacto</li>
+    </ul></div>
+  </div>
+  <div class="ft-bot">
+    <span class="ft-copy">© 2025 PetNest UY</span>
+    <div class="ft-pays">
+      <span class="ft-pay">VISA</span><span class="ft-pay">MasterCard</span>
+      <span class="ft-pay">MercadoPago</span><span class="ft-pay">Abitab</span>
+    </div>
+  </div>
+</footer>`;
+
+render();
+</script>
+</body>
+</html>

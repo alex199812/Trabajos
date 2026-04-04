@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Catálogo de Productos para Mascotas — PetNest UY</title>
+  <meta name="description" content="Explorá nuestro catálogo completo de productos para mascotas en Uruguay. Alimentos, accesorios, higiene y más para perros, gatos, roedores y acuario.">
+  <link rel="canonical" href="https://petnestuy.com/catalog.html">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://petnestuy.com/catalog.html">
+  <meta property="og:title" content="Catálogo de Productos para Mascotas — PetNest UY">
+  <meta property="og:description" content="Explorá nuestro catálogo completo de productos para mascotas en Uruguay. Alimentos, accesorios, higiene y más para perros, gatos, roedores y acuario.">
+  <meta property="og:image" content="https://petnestuy.com/assets/logo/logo.jpeg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Catálogo de Productos para Mascotas — PetNest UY">
+  <meta name="twitter:description" content="Explorá nuestro catálogo completo de productos para mascotas en Uruguay.">
+  <link rel="stylesheet" href="./css/variables.css">
+  <link rel="stylesheet" href="./css/base.css">
+  <link rel="stylesheet" href="./css/header.css">
+  <link rel="stylesheet" href="./css/footer.css">
+  <link rel="stylesheet" href="./css/catalog.css">
+  <link rel="stylesheet" href="./css/components.css">
+</head>
+<body>
+
+  <div id="main-header"></div>
+
+  <main>
+    <div class="chdr">
+      <h1>Catálogo Completo de Productos para Mascotas</h1>
+      <p>Encontrá todo lo que tu mascota necesita</p>
+      <div class="csrch">
+        <svg class="csrch-ico" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2.2">
+          <circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+        <input type="search" id="cat-search" placeholder="Buscar productos…">
+      </div>
+    </div>
+
+    <div class="fbar container" id="fbar">
+      <button class="fb" data-filter="todos">🐾 Todos</button>
+      <button class="fb" data-filter="perros" data-type="category">🐶 Perros</button>
+      <button class="fb" data-filter="gatos" data-type="category">🐱 Gatos</button>
+      <button class="fb" data-filter="roedores" data-type="category">🐹 Aves y Roedores</button>
+      <button class="fb" data-filter="acuario" data-type="category">🐠 Acuario</button>
+      <button class="fb" data-filter="shampoo" data-type="category">🛁 Higiene</button>
+      <button class="fb" data-filter="educadores" data-type="category">🎓 Educadores</button>
+      <button class="fb" data-filter="sanitaria" data-type="category">🐾 Sanitaria</button>
+      <button class="fb" data-filter="descuentos" data-type="tag">🔥 Descuentos</button>
+      <button class="fb" data-filter="nuevo" data-type="tag">✨ Novedades</button>
+    </div>
+
+    <div class="section container">
+      <div class="pgrid" id="prod-grid"></div>
+    </div>
+  </main>
+
+  <div id="main-footer"></div>
+
+  <script type="module">
+    import { renderHeader, renderFooter } from './js/main.js';
+    import { loadProducts, getUrlParams } from './js/catalog.js';
+
+    const { category, tag, search } = getUrlParams();
+
+    // Determinar qué ítem del nav debe quedar activo según la URL
+    const activePage = tag      ? tag
+                     : category ? category
+                     : 'catalog';
+
+    renderHeader(activePage);
+    renderFooter();
+
+    // Activar filtro correspondiente según URL
+    function activateFilter(value) {
+      document.querySelectorAll('.fb').forEach(b => {
+        b.classList.toggle('on', b.dataset.filter === value || (value === '' && b.dataset.filter === 'todos'));
+      });
+    }
+
+    // Cargar productos según URL
+    function loadFromUrl() {
+      if (search)       { loadProducts({ search }, 'prod-grid'); activateFilter('todos'); }
+      else if (tag)     { loadProducts({ tag },    'prod-grid'); activateFilter(tag); }
+      else if (category){ loadProducts({ category },'prod-grid'); activateFilter(category); }
+      else              { loadProducts({},          'prod-grid'); activateFilter('todos'); }
+    }
+
+    loadFromUrl();
+
+    // Filtros
+    document.querySelectorAll('.fb').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.fb').forEach(b => b.classList.remove('on'));
+        btn.classList.add('on');
+        const f = btn.dataset.filter;
+        const t = btn.dataset.type;
+        if (f === 'todos') loadProducts({}, 'prod-grid');
+        else if (t === 'tag')      loadProducts({ tag: f },      'prod-grid');
+        else if (t === 'category') loadProducts({ category: f }, 'prod-grid');
+      });
+    });
+
+    // Búsqueda
+    const searchInput = document.getElementById('cat-search');
+    if (search) searchInput.value = search;
+    let searchTimer;
+    searchInput.addEventListener('input', () => {
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(() => {
+        const q = searchInput.value.trim();
+        if (q.length > 1) loadProducts({ search: q }, 'prod-grid');
+        else if (q === '') loadProducts({}, 'prod-grid');
+      }, 350);
+    });
+  </script>
+</body>
+</html>

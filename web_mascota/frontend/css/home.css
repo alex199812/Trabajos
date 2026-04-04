@@ -1,0 +1,226 @@
+@import './variables.css';
+
+/* ═══════════════════════════════════════
+   HERO
+═══════════════════════════════════════ */
+.hero {
+  background: linear-gradient(145deg, #06152a 0%, #0f2540 40%, #1a4080 75%, #2563c4 100%);
+  min-height: 86vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 2rem 5%;
+}
+
+/* Fondo animado del hero */
+.hbg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.hbub {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,.04);
+  animation: rise linear infinite;
+}
+@keyframes rise {
+  from { transform: translateY(110vh) scale(.7); opacity: 0; }
+  5%   { opacity: 1; }
+  to   { transform: translateY(-200px) scale(1.4); opacity: 0; }
+}
+
+/* Emojis flotantes de fondo */
+.hpw {
+  position: absolute;
+  font-size: 16px;
+  opacity: .12;
+  animation: sway ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes sway {
+  0%,100% { transform: rotate(-12deg) translateY(0); }
+  50%      { transform: rotate(12deg) translateY(-20px); }
+}
+
+/* Contenedor principal del hero */
+.hero-wrap {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+/* Texto del hero */
+.htxt { color: #fff; }
+
+.hbadge {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  background: rgba(245,168,28,.18);
+  border: 1px solid rgba(245,168,28,.4);
+  color: var(--lg);
+  padding: .3rem .9rem;
+  border-radius: var(--pill);
+  font-size: .77rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.h1 {
+  font-size: clamp(2.3rem, 4.5vw, 4rem);
+  font-weight: 900;
+  line-height: 1.08;
+  letter-spacing: -1.5px;
+  margin-bottom: 1rem;
+}
+.h1 em {
+  font-style: normal;
+  background: linear-gradient(90deg, #f5a81c, #ffd166);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hsub {
+  color: rgba(255,255,255,.68);
+  font-size: 1rem;
+  line-height: 1.65;
+  max-width: 440px;
+  margin-bottom: 1.8rem;
+}
+
+/* Botones del hero */
+.hbtns {
+  display: flex;
+  gap: .65rem;
+  flex-wrap: wrap;
+}
+
+.btn-gold {
+  padding: .82rem 1.8rem;
+  border-radius: var(--pill);
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, #f5a81c, #ffd166);
+  color: #1a2b3c;
+  font-weight: 800;
+  font-size: .93rem;
+  box-shadow: 0 8px 28px rgba(245,168,28,.45);
+  transition: .25s;
+  font-family: inherit;
+}
+.btn-gold:hover { transform: translateY(-3px); }
+
+.btn-out {
+  padding: .82rem 1.8rem;
+  border-radius: var(--pill);
+  cursor: pointer;
+  background: rgba(255,255,255,.1);
+  border: 1.5px solid rgba(255,255,255,.3);
+  color: #fff;
+  font-weight: 700;
+  font-size: .93rem;
+  transition: .2s;
+  font-family: inherit;
+}
+.btn-out:hover { background: rgba(255,255,255,.2); }
+
+/* Grid de animales */
+.hanimals {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 12px;
+  padding: 1rem;
+  perspective: 1000px;
+}
+
+.hac {
+  background: rgba(255,255,255,.08);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: var(--R);
+  padding: 1rem .75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .4rem;
+  cursor: pointer;
+  transition: transform .35s cubic-bezier(.34,1.56,.64,1);
+  animation: fin .6s ease forwards;
+  opacity: 0;
+}
+@keyframes fin { to { opacity: 1; } }
+.hac:hover { transform: translateY(-10px) scale(1.06); }
+.hac svg   { width: 60px; height: 60px; }
+
+.hac-lbl {
+  color: #fff;
+  font-size: .75rem;
+  font-weight: 700;
+  opacity: .85;
+  text-align: center;
+}
+.hac-cnt {
+  color: rgba(255,209,102,.85);
+  font-size: .7rem;
+  font-weight: 600;
+}
+
+/* ═══════════════════════════════════════
+   CATEGORY GRID
+═══════════════════════════════════════ */
+.cc {
+  background: var(--card);
+  border-radius: var(--R);
+  padding: 1.2rem .8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .55rem;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s;
+  box-shadow: 0 2px 16px rgba(0,0,0,.06);
+}
+.cc:hover {
+  transform: translateY(-7px) scale(1.05);
+  border-color: rgba(37,99,196,.25);
+  box-shadow: 0 16px 40px rgba(0,0,0,.12);
+}
+.cc-ico {
+  width: 66px; height: 66px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.cc-ico svg { width: 56px; height: 56px; }
+.cc-name { font-size: .8rem;  font-weight: 800; color: var(--tx); text-align: center; }
+.cc-sub  { font-size: .7rem; color: var(--mt); font-weight: 500; text-align: center; }
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media (max-width: 768px) {
+  .hero-wrap {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .hsub   { margin: 0 auto 1.8rem; }
+  .hbtns  { justify-content: center; }
+  .hanimals {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+  }
+  .hac svg { width: 44px; height: 44px; }
+}

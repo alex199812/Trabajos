@@ -1,0 +1,48 @@
+/* ═══════════════════════════════════════
+   PetNest UY — Variables globales
+   Importar este archivo en TODOS los CSS
+═══════════════════════════════════════ */
+
+:root {
+  /* Colores principales */
+  --nv:      #0f2540;
+  --bl:      #1a4a8a;
+  --bl2:     #2563c4;
+  --gd:      #f5a81c;
+  --lg:      #ffd166;
+
+  /* Fondos */
+  --bg:      #edf2f8;
+  --wh:      #ffffff;
+  --card:    rgba(255, 255, 255, 0.92);
+
+  /* Texto */
+  --tx:      #0f1f2e;
+  --mt:      #4a6580;
+
+  /* Bordes */
+  --border:  rgba(15, 37, 64, 0.1);
+
+  /* Radios */
+  --R:       20px;
+  --r:       12px;
+  --pill:    100px;
+
+  /* Sombras */
+  --shadow-sm:  0 2px 16px rgba(0, 0, 0, 0.06);
+  --shadow-md:  0 4px 24px rgba(0, 0, 0, 0.09);
+  --shadow-lg:  0 12px 40px rgba(0, 0, 0, 0.14);
+  --shadow-blu: 0 6px 22px rgba(37, 99, 196, 0.35);
+
+  /* Tipografía */
+  --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+
+  /* Transiciones */
+  --t: 0.22s ease;
+  --t-bounce: 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --pill:    100px;
+
+  /* Header height */
+  --header-h: 96px;
+}

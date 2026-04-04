@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Iniciar Sesión o Registrarse — PetNest UY</title>
+  <meta name="description" content="Accedé a tu cuenta PetNest UY para gestionar tus pedidos y favoritos. ¿No tenés cuenta? Registrate gratis.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://petnestuy.com/login.html">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://petnestuy.com/login.html">
+  <meta property="og:title" content="Iniciar Sesión — PetNest UY">
+  <meta property="og:description" content="Accedé a tu cuenta PetNest UY para gestionar tus pedidos y favoritos.">
+  <meta property="og:image" content="https://petnestuy.com/assets/logo/logo.jpeg">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{font-family:'Segoe UI',system-ui,sans-serif;background:#0f2540;min-height:100vh;overflow-x:hidden}
+:root{--nv:#0f2540;--bl:#1a4a8a;--bl2:#2563c4;--gd:#f5a81c;--lg:#ffd166;--tx:#0f1f2e;--mt:#4a6580;--R:20px;--r:12px}
+
+/* ── HEADER MÍNIMO ── */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:.8rem 5%;background:rgba(255,255,255,.05);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.08)}
+.tb-logo{display:flex;align-items:center;gap:.5rem;text-decoration:none;color:#fff;font-size:1.05rem;font-weight:900}
+.tb-back{display:flex;align-items:center;gap:.35rem;color:rgba(255,255,255,.6);font-size:.82rem;font-weight:600;text-decoration:none;padding:.38rem .8rem;border-radius:100px;border:1px solid rgba(255,255,255,.15);transition:.2s}
+.tb-back:hover{background:rgba(255,255,255,.1);color:#fff}
+.tb-back svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.5}
+
+/* ── FONDO ANIMADO ── */
+.login-wrap{min-height:calc(100vh - 52px);display:flex;align-items:center;justify-content:center;padding:2rem 5%;position:relative;overflow:hidden}
+.bg-circle{position:absolute;border-radius:50%;pointer-events:none}
+.bg-circle:nth-child(1){width:500px;height:500px;background:rgba(37,99,196,.12);top:-150px;right:-100px}
+.bg-circle:nth-child(2){width:350px;height:350px;background:rgba(245,168,28,.06);bottom:-80px;left:-80px}
+.bg-circle:nth-child(3){width:200px;height:200px;background:rgba(255,255,255,.03);top:40%;left:10%}
+
+/* ── CARD CONTENEDOR ── */
+.auth-card{width:100%;max-width:800px;border-radius:24px;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;box-shadow:0 40px 100px rgba(0,0,0,.6);position:relative;z-index:2;transition:all .6s cubic-bezier(.77,0,.175,1)}
+.auth-card.reg-mode .form-side {transform:translateX(100%)}
+.auth-card.reg-mode .panel-side{transform:translateX(-100%)}
+
+/* ── LADO FORMULARIO ── */
+.form-side{background:#f4f7fb;padding:2.8rem 2.5rem;display:flex;flex-direction:column;align-items:center;transition:transform .6s cubic-bezier(.77,0,.175,1);position:relative;z-index:2}
+
+.form-logo{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--nv),var(--bl2));display:flex;align-items:center;justify-content:center;margin-bottom:.9rem;box-shadow:0 6px 20px rgba(37,99,196,.35);font-size:1.4rem}
+
+.form-title{font-size:1.4rem;font-weight:900;color:var(--nv);margin-bottom:.18rem;text-align:center}
+.form-sub{font-size:.78rem;color:var(--mt);margin-bottom:1.3rem;text-align:center}
+
+/* Botones sociales — tamaño fijo */
+.social-row{display:flex;gap:.6rem;margin-bottom:1rem}
+.soc-btn{
+  width:42px;height:42px;
+  border-radius:50%;
+  background:#fff;
+  border:1.5px solid rgba(15,37,64,.1);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;
+  transition:.2s;
+  box-shadow:0 2px 10px rgba(0,0,0,.07);
+  flex-shrink:0;
+  overflow:hidden;
+}
+.soc-btn:hover{transform:translateY(-3px);box-shadow:0 6px 18px rgba(0,0,0,.15)}
+/* SVG dentro del botón — siempre 18px */
+.soc-btn svg{
+  width:18px !important;
+  height:18px !important;
+  display:block;
+  flex-shrink:0;
+}
+
+.sep{font-size:.72rem;color:var(--mt);margin-bottom:1rem;opacity:.6;display:flex;align-items:center;gap:.6rem;width:100%}
+.sep::before,.sep::after{content:'';flex:1;height:1px;background:rgba(15,37,64,.1)}
+
+/* Campos */
+.extra-field{display:none;width:100%}
+.field{width:100%;position:relative;margin-bottom:.75rem}
+.field-ico{position:absolute;left:.88rem;top:50%;transform:translateY(-50%);width:15px;height:15px;stroke:var(--mt);fill:none;stroke-width:2;opacity:.5;pointer-events:none}
+.field input{
+  width:100%;
+  padding:.7rem 1rem .7rem 2.6rem;
+  border-radius:100px;
+  border:1.5px solid rgba(15,37,64,.1);
+  background:rgba(255,255,255,.85);
+  font-size:.87rem;
+  color:var(--tx);
+  outline:none;
+  transition:.2s;
+}
+.field input:focus{border-color:var(--bl2);background:#fff;box-shadow:0 0 0 4px rgba(37,99,196,.1)}
+.field input::placeholder{color:var(--mt);opacity:.65}
+
+.err-msg{width:100%;font-size:.78rem;color:#e74c3c;background:rgba(231,76,60,.07);border:1px solid rgba(231,76,60,.18);border-radius:var(--r);padding:.5rem .9rem;margin-bottom:.65rem;display:none;text-align:center}
+
+.forgot{font-size:.75rem;color:var(--mt);cursor:pointer;align-self:flex-end;opacity:.6;margin-bottom:1.2rem;transition:.2s}
+.forgot:hover{opacity:1;color:var(--bl2)}
+
+.submit-btn{
+  width:100%;padding:.75rem;
+  border-radius:100px;border:none;
+  background:linear-gradient(135deg,var(--nv),var(--bl2));
+  color:#fff;font-weight:800;font-size:.92rem;
+  cursor:pointer;
+  box-shadow:0 6px 22px rgba(37,99,196,.38);
+  transition:.2s;
+}
+.submit-btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(37,99,196,.45)}
+.submit-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+
+/* ── LADO PANEL AZUL ── */
+.panel-side{
+  background:linear-gradient(145deg,#1a4a8a,var(--bl2));
+  padding:2.8rem 2.2rem;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  color:#fff;text-align:center;
+  transition:transform .6s cubic-bezier(.77,0,.175,1);
+  position:relative;z-index:1;
+}
+.panel-paw{font-size:3rem;margin-bottom:1rem;animation:pulse 3s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+.panel-side h2{font-size:1.8rem;font-weight:900;line-height:1.15;margin-bottom:.7rem}
+.panel-side p{font-size:.84rem;opacity:.72;line-height:1.6;max-width:210px;margin:0 auto 1.8rem}
+.switch-btn{
+  padding:.65rem 2rem;
+  border-radius:100px;
+  border:2px solid rgba(255,255,255,.6);
+  background:transparent;color:#fff;
+  font-weight:800;font-size:.86rem;
+  cursor:pointer;letter-spacing:.05em;transition:.2s;
+}
+.switch-btn:hover{background:rgba(255,255,255,.15);border-color:#fff}
+
+/* ── RESPONSIVE ── */
+@media(max-width:580px){
+  .auth-card{grid-template-columns:1fr}
+  .panel-side{display:none}
+  .form-side{padding:2.2rem 1.6rem}
+  .auth-card.reg-mode .form-side{transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER MÍNIMO -->
+<div class="topbar">
+  <a class="tb-logo" href="/index.html">🐾 PetNest UY</a>
+  <a class="tb-back" href="/index.html">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    Volver al inicio
+  </a>
+</div>
+
+<!-- FONDO -->
+<div class="login-wrap">
+  <div class="bg-circle"></div>
+  <div class="bg-circle"></div>
+  <div class="bg-circle"></div>
+
+  <div class="auth-card" id="authCard">
+
+    <!-- FORMULARIO -->
+    <div class="form-side">
+      <div class="form-logo">🐾</div>
+      <div class="form-title" id="formTitle">Iniciar sesión</div>
+      <div class="form-sub">Accedé a tu cuenta PetNest UY</div>
+
+      <!-- Sociales -->
+      <div class="social-row">
+        <button class="soc-btn" title="Google">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+          </svg>
+        </button>
+        <button class="soc-btn" title="Facebook">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1877F2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+          </svg>
+        </button>
+        <button class="soc-btn" title="Apple">
+          <svg viewBox="0 0 24 24" fill="#111" stroke="none">
+            <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.7 9.05 7.42c1.28.07 2.18.75 2.94.8.94-.19 1.85-.89 2.86-.84 1.22.07 2.14.59 2.74 1.5-2.53 1.51-1.93 4.84.66 5.79-.5 1.34-1.16 2.66-2.2 3.61zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+          </svg>
+        </button>
+        <button class="soc-btn" title="WhatsApp">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#25D366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="sep">o usá tu email</div>
+
+      <p class="err-msg" id="errMsg"></p>
+
+      <!-- Nombre (solo registro) -->
+      <div class="extra-field" id="extraField">
+        <div class="field">
+          <svg class="field-ico" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <input id="fName" type="text" placeholder="Nombre completo">
+        </div>
+      </div>
+
+      <div class="field">
+        <svg class="field-ico" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <input id="fEmail" type="email" placeholder="Email">
+      </div>
+
+      <div class="field">
+        <svg class="field-ico" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <input id="fPass" type="password" placeholder="Contraseña">
+      </div>
+
+      <div class="forgot" id="forgotLink">¿Olvidaste tu contraseña?</div>
+      <button class="submit-btn" id="submitBtn">Ingresar</button>
+    </div>
+
+    <!-- PANEL AZUL -->
+    <div class="panel-side">
+      <div class="panel-paw">🐾</div>
+      <h2 id="panelTitle">¡Hola,<br>amigo!</h2>
+      <p id="panelText">¿No tenés cuenta? ¡Registrate y empezá a disfrutar de los mejores productos para tu mascota!</p>
+      <button class="switch-btn" id="switchBtn" onclick="toggleMode()">REGISTRARSE</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const API = 'http://localhost:5000/api';
+let isReg = false;
+
+function toggleMode() {
+  isReg = !isReg;
+  document.getElementById('authCard').classList.toggle('reg-mode', isReg);
+  document.getElementById('formTitle').textContent   = isReg ? 'Crear cuenta'     : 'Iniciar sesión';
+  document.getElementById('extraField').style.display= isReg ? 'block'            : 'none';
+  document.getElementById('forgotLink').style.display= isReg ? 'none'             : 'block';
+  document.getElementById('submitBtn').textContent   = isReg ? 'Crear cuenta'     : 'Ingresar';
+  document.getElementById('panelTitle').innerHTML    = isReg ? '¡Bienvenido<br>de vuelta!' : '¡Hola,<br>amigo!';
+  document.getElementById('panelText').textContent   = isReg
+    ? 'Ya tenés cuenta. Ingresá y accedé a tus pedidos y favoritos.'
+    : '¿No tenés cuenta? ¡Registrate y empezá a disfrutar de los mejores productos!';
+  document.getElementById('switchBtn').textContent   = isReg ? 'INICIAR SESIÓN'   : 'REGISTRARSE';
+  clearErr();
+}
+
+function showErr(msg) {
+  const e = document.getElementById('errMsg');
+  e.textContent = msg;
+  e.style.display = 'block';
+}
+function clearErr() {
+  const e = document.getElementById('errMsg');
+  e.textContent = '';
+  e.style.display = 'none';
+}
+
+async function handleSubmit() {
+  clearErr();
+  const email = document.getElementById('fEmail').value.trim();
+  const pass  = document.getElementById('fPass').value;
+  const btn   = document.getElementById('submitBtn');
+
+  if (!email || !pass) { showErr('Completá todos los campos.'); return; }
+
+  btn.disabled = true;
+  btn.textContent = '...';
+
+  try {
+    if (isReg) {
+      const name = document.getElementById('fName').value.trim();
+      if (!name) { showErr('Ingresá tu nombre.'); return; }
+      const res  = await fetch(`${API}/auth/register`, {
+        method: 'POST', headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ name, email, password: pass })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
+      // Registro ok → cambiar a login
+      toggleMode();
+      showErr('✅ Cuenta creada. Ahora iniciá sesión.');
+      document.getElementById('errMsg').style.color = '#27ae60';
+    } else {
+      const res  = await fetch(`${API}/auth/login`, {
+        method: 'POST', headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ email, password: pass })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
+      localStorage.setItem('petnest_user', JSON.stringify(data.user));
+      window.location.href = '/index.html';
+    }
+  } catch(err) {
+    showErr(err.message || 'Error de conexión.');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = isReg ? 'Crear cuenta' : 'Ingresar';
+  }
+}
+
+document.getElementById('submitBtn').addEventListener('click', handleSubmit);
+document.querySelectorAll('.field input').forEach(inp =>
+  inp.addEventListener('keydown', e => { if (e.key === 'Enter') handleSubmit(); })
+);
+</script>
+</body>
+</html>
