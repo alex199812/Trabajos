@@ -33,6 +33,7 @@ def serve_frontend(path="index.html"):
 def status():
     return {"status": "ok", "app": "PetNest UY API", "version": "1.0"}
 
-if __name__ == "__main__":
-    app.run(debug=active_config.DEBUG, port=active_config.PORT)
-
+if __name__ == '__main__':
+    import os
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=False)
